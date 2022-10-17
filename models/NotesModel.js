@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
     noteTitle: {
         type: String,
         required: true,
+        unique: true,
         maxLength: 100
     },
     noteDescription: {
@@ -19,12 +20,10 @@ const mongoose = require('mongoose');
     },
     
     dateAdded: {
-        type: Date, 
-        default: Date.now
+        type: Date
     },
     dateUpdated: {
-        type: Date, 
-        default: Date.now
+        type: Date
     },
     
 })

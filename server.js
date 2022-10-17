@@ -1,13 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const noteRoutes = require("./routes/NoteRoutes")
 
 const DB_URL = "mongodb+srv://101337015_Elizaveta:12345@cluster0.iugv30a.mongodb.net/comp3123?retryWrites=true&w=majority"
+
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-mongoose.Promise = global.Promise;
+PORT = 8081;
+
+app.use("/", noteRoutes)
 
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
@@ -25,6 +30,6 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(8081, () => {
-    console.log("Server is listening on port 3000");
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
 });
