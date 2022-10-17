@@ -30,6 +30,7 @@
   "homepage": "https://github.com/starryskyyy/101337015_COMP3123-exec06#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "mongoose": "^6.6.5",
     "nodemon": "^2.0.20"
   },
   "devDependencies": {
