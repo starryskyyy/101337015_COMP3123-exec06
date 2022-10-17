@@ -4,6 +4,7 @@ const express = require("express")
 
 const routes = express.Router()
 
+// add note
 routes.post('/notes', async (req, res) => {
     // Validate request
     try {
@@ -29,7 +30,7 @@ routes.post('/notes', async (req, res) => {
     }
 });
 
-
+// display all notes
 routes.get('/notes', async (req, res) => {
     try {
         const notes = await NoteModel.find()
@@ -45,7 +46,7 @@ routes.get('/notes', async (req, res) => {
     }
 });
 
-
+// display note by id
 routes.get('/notes/:noteId', async (req, res) => {
     try {
 
@@ -63,10 +64,16 @@ routes.get('/notes/:noteId', async (req, res) => {
 
 });
 
-
+//update note
 routes.put('/notes/:noteId', async (req, res) => {
     try {
-        const updateNote = await NoteModel.findByIdAndUpdate(req.params.noteId, req.body, { runValidators: true })
+        let noteParams = {
+            noteTitle: req.body.noteTitle,
+            noteDescription: req.body.noteDescription,
+            priority: req.body.priority,
+            dateUpdated: new Date
+        };
+        const updateNote = await NoteModel.findByIdAndUpdate(req.params.noteId, noteParams, { runValidators: true })
         res.status(200).send(updateNote)
         
     }catch (error) {
@@ -80,11 +87,11 @@ routes.put('/notes/:noteId', async (req, res) => {
 }
 });
 
-
+// delete note
 routes.delete('/notes/:noteId', async (req, res) => {
     try{
         const deletedNote = await NoteModel.findByIdAndDelete(req.params.noteId)
-        res.status(204).send(deletedNote)
+        res.status(200).send(deletedNote)
     }catch(error){
         if (error.kind === "ObjectId") {
             res.status(400).send({ message: `note with id: ${req.params.noteId} was not found` });
