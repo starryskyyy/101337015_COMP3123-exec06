@@ -2,14 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const DB_URL = "mongodb+srv://sa:s3cr3t@cluster0.qa3t4.mongodb.net/gbc-fall2020?retryWrites=true&w=majority"
+const DB_URL = "mongodb+srv://101337015_Elizaveta:12345@cluster0.iugv30a.mongodb.net/comp3123?retryWrites=true&w=majority"
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 mongoose.Promise = global.Promise;
 
-// TODO - Update your mongoDB Atals Url here to Connect to the database
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
